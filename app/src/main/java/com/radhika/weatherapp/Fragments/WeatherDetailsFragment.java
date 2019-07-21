@@ -2,6 +2,7 @@ package com.radhika.weatherapp.Fragments;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -17,14 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.weatherapp.Adapters.CitiesAdapter;
+import com.radhika.weatherapp.Common.FragmentsManager;
 import com.radhika.weatherapp.Models.Cities;
+import com.radhika.weatherapp.Models.WeatherAPIResult;
 import com.radhika.weatherapp.R;
+import com.radhika.weatherapp.RecyclerViewClickListener;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 
 import java.util.List;
 import java.util.Objects;
 
-public class WeatherDetailsFragment extends Fragment {
+public class WeatherDetailsFragment extends Fragment  {
 
     private TextView cityName;
     private RecyclerView rvCities;
@@ -52,7 +57,18 @@ public class WeatherDetailsFragment extends Fragment {
     }
 
     private void bindRecyclerView(List<Cities> cities) {
-        CitiesAdapter homeAdapter = new CitiesAdapter(cities);
+        CitiesAdapter homeAdapter = new CitiesAdapter(cities, new RecyclerViewClickListener() {
+            @Override
+            public void onClick() {
+                    try {
+                        CityWiseWeatherFragment cityWiseWeatherFragment = new CityWiseWeatherFragment();
+                        FragmentsManager.replaceFragment(getActivity(),cityWiseWeatherFragment,R.id.fragment_container,false);
+                    }
+                    catch (Exception error){
+                        Log.d("error",error.toString());
+                    }
+            }
+        },getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rvCities.setLayoutManager(mLayoutManager);
         rvCities.setItemAnimator(new DefaultItemAnimator());
@@ -71,4 +87,6 @@ public class WeatherDetailsFragment extends Fragment {
         cityName = view.findViewById(R.id.tv_city);
         rvCities = view.findViewById(R.id.rv_city);
     }
+
+
 }

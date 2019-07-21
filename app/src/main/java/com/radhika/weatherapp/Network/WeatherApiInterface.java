@@ -8,6 +8,6 @@ import retrofit2.http.Query;
 
 public interface WeatherApiInterface {
 
-    @GET("find")
+    @GET("forecast")
     Call<WeatherAPIResult> getWeather(@Query("q") String cityName);
 }

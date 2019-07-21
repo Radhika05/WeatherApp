@@ -1,5 +1,7 @@
 package com.radhika.weatherapp.Models;
 
+import android.view.ScaleGestureDetector;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +17,17 @@ public class List {
     private Object snow;
     private Clouds clouds;
     private java.util.List<Weather> weather = null;
+    private String dt_txt;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+
+    public String getDt_txt() {
+        return dt_txt;
+    }
+
+    public void setDt_txt(String dt_txt) {
+        this.dt_txt = dt_txt;
+    }
 
     public Integer getId() {
         return id;

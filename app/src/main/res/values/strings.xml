@@ -2,7 +2,6 @@
     <string name="app_name">Weather App</string>
 
 
-
     <string name="BASE_URL">http://api.openweathermap.org</string>
     <string name="API_KEY">ceba0b15bdmsh8399215b9e295b1p15714fjsn57fde7755e5c</string>
     <string name="URL">community-open-weather-map.p.rapidapi.com</string>

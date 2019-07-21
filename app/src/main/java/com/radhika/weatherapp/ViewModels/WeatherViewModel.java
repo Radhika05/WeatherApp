@@ -13,6 +13,7 @@ import com.radhika.weatherapp.Network.WeatherAPIRepositary;
 import java.util.List;
 
 public class WeatherViewModel extends ViewModel {
+    private final MutableLiveData<String> cities = new MutableLiveData<String>();
     private WeatherAPIRepositary weatherAPIRepositary = new WeatherAPIRepositary();
 
     public MutableLiveData<WeatherAPIResult> getWeatherInfo(String cityName){
@@ -26,5 +27,14 @@ public class WeatherViewModel extends ViewModel {
 
     public void insertCities(Cities cities){
         weatherAPIRepositary.insert(cities);
+    }
+
+    public boolean setCity(String city) {
+        cities.setValue(city);
+        return true;
+    }
+
+    public MutableLiveData<String> getCity() {
+        return cities;
     }
 }
