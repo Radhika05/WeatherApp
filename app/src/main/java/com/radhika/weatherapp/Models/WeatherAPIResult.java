@@ -1,25 +1,13 @@
 package com.radhika.weatherapp.Models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WeatherAPIResult {
     private String message;
     private String cod;
     private Integer count;
-    private List list = null;
-
-    public void setList(List list) {
-        this.list = list;
-    }
-
-    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-    }
-
-
+    private java.util.List<com.radhika.weatherapp.Models.List> list = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getMessage() {
@@ -46,6 +34,14 @@ public class WeatherAPIResult {
         this.count = count;
     }
 
+    public java.util.List<com.radhika.weatherapp.Models.List> getList() {
+        return list;
+    }
+
+    public void setList(java.util.List<com.radhika.weatherapp.Models.List> list) {
+        this.list = list;
+    }
+
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -53,4 +49,5 @@ public class WeatherAPIResult {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
 }

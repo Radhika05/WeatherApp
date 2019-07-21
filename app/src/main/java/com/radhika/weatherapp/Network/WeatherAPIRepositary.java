@@ -1,7 +1,7 @@
 package com.radhika.weatherapp.Network;
 
+import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -11,11 +11,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.radhika.weatherapp.Database.WeatherDao;
 import com.radhika.weatherapp.Database.WeatherDatabase;
 import com.radhika.weatherapp.Models.Cities;
-import com.radhika.weatherapp.Models.Weather;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -28,16 +28,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherAPIRepositary {
 
-    private WeatherAPIRepositary instance;
+    private  WeatherAPIRepositary instance;
     private static Retrofit retrofit;
-    WeatherDao weatherDao;
-    private  MutableLiveData<List<Cities>> allCities;
+    private static WeatherDao weatherDao;
+    WeatherDatabase mapsDatabase;
+    private  LiveData<List<Cities>> allCities;
     private MutableLiveData<WeatherAPIResult> weatherAPIResultMutableLiveData = new MutableLiveData<>();
 
-    public WeatherAPIRepositary(Application application){
-        WeatherDatabase mapsDatabase = WeatherDatabase.getInstance(application);
-        weatherDao = mapsDatabase.weatherDao();
-        allCities = weatherDao.getCities();
+    public WeatherAPIRepositary(Application activity){
+            mapsDatabase = WeatherDatabase.getInstance(activity);
+            weatherDao = mapsDatabase.weatherDao();
+
     }
 
     public WeatherAPIRepositary(){
@@ -85,7 +86,6 @@ public class WeatherAPIRepositary {
             public void onResponse(Call<WeatherAPIResult> call, retrofit2.Response<WeatherAPIResult> response) {
                 weatherAPIResultMutableLiveData.postValue(response.body());
             }
-
             @Override
             public void onFailure(Call<WeatherAPIResult> call, Throwable t) {
                 Log.i("failure",t.toString());
@@ -110,42 +110,43 @@ public class WeatherAPIRepositary {
         new DeleteCityAsync(weatherDao).execute(cities);
     }
 
-    public MutableLiveData<List<Cities>> getAllCities(){
+    public LiveData<List<Cities>> getAllCities(){
+        allCities = weatherDao.getCities();
         return allCities;
     }
 
     public static class InsertCityAsync extends AsyncTask<Cities, Void, Void> {
-        WeatherDao mapsDao;
-        private InsertCityAsync(WeatherDao mapsDao){
-            this.mapsDao = mapsDao;
+       WeatherDao weatherDao;
+        private InsertCityAsync(WeatherDao weatherDao){
+            this.weatherDao = weatherDao;
         }
         @Override
         protected Void doInBackground(Cities... cities) {
-            mapsDao.insert(cities[0]);
+            weatherDao.insert(cities[0]);
             return null;
         }
     }
 
     public static class UpdateCityAsync extends AsyncTask<Cities, Void, Void>{
-        WeatherDao mapsDao;
-        private UpdateCityAsync(WeatherDao mapsDao){
-            this.mapsDao = mapsDao;
+        WeatherDao weatherDao;
+        private UpdateCityAsync(WeatherDao weatherDao){
+            this.weatherDao = weatherDao;
         }
         @Override
         protected Void doInBackground(Cities... cities) {
-            mapsDao.update(cities[0]);
+            weatherDao.update(cities[0]);
             return null;
         }
     }
 
     public static class DeleteCityAsync extends AsyncTask<Cities, Void, Void>{
-        WeatherDao mapsDao;
-        private DeleteCityAsync(WeatherDao mapsDao){
-            this.mapsDao = mapsDao;
+        WeatherDao weatherDao;
+        private DeleteCityAsync(WeatherDao weatherDao){
+            this.weatherDao = weatherDao;
         }
         @Override
         protected Void doInBackground(Cities... cities) {
-            mapsDao.delete(cities[0]);
+            weatherDao.delete(cities[0]);
             return null;
         }
     }

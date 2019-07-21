@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.radhika.weatherapp.Models.Cities;
 
-@Database(entities = Cities.class, version = 1)
+@Database(entities = Cities.class, version = 1,exportSchema = false)
 public abstract class WeatherDatabase extends RoomDatabase {
     public abstract WeatherDao weatherDao();
     private static WeatherDatabase instance;

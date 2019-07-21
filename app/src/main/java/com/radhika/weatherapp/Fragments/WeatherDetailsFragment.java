@@ -22,25 +22,24 @@ import com.radhika.weatherapp.R;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WeatherDetailsFragment extends Fragment {
 
     private TextView cityName;
     private RecyclerView rvCities;
     private WeatherViewModel weatherViewModel;
-    public WeatherDetailsFragment() {
-    }
 
     @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_details, container, false);
         initViews(view);
-        weatherViewModel.getAllCities().observe(this, new Observer<List<Cities>>() {
+        weatherViewModel.getAllCities(Objects.requireNonNull(getActivity()).getApplication()).observe(this, new Observer<List<Cities>>() {
                     @Override
                     public void onChanged(List<Cities> cities) {
-                        if(cities==null){
+                        if(cities==null || cities.size()==0){
                             Toast.makeText(getActivity(),"No City Added",Toast.LENGTH_SHORT).show();
                         }
                         else {

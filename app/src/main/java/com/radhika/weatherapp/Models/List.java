@@ -3,7 +3,7 @@ package com.radhika.weatherapp.Models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class List<C> {
+public class List {
     private Integer id;
     private String name;
     private Coord coord;

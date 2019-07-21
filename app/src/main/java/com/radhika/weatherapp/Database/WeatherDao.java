@@ -20,7 +20,7 @@ public interface WeatherDao {
     void insertCategory(List<Cities> cities);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Cities maps);
+    void insert(Cities cities);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Cities maps);
@@ -29,6 +29,6 @@ public interface WeatherDao {
     void delete(Cities maps);
 
     @Query("SELECT * FROM Cities")
-    public MutableLiveData<List<Cities>> getCities();
+    public LiveData<List<Cities>> getCities();
 
 }
