@@ -1,19 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
+    android:background="@color/colorGrey"
     android:layout_height="match_parent"
     tools:context=".Fragments.CityWiseWeatherFragment">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_city_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rain_val" />
+
+    <ImageView
+        android:id="@+id/img_forecast_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/app_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/centurygothic"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_forecast_icon" />
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_date" />
+
+    <TextView
+        android:id="@+id/txt_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginStart="27dp"
+        android:text="@string/wind"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/txt_wind_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="TextView"
+        android:fontFamily="@font/centurygothic"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        app:layout_constraintGuide_begin="107dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="139dp" />
+
+    <TextView
+        android:id="@+id/txt_rain"
+        android:fontFamily="@font/centurygothic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="10dp"
+        android:text="Rain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wind" />
+
+    <TextView
+        android:id="@+id/txt_rain_val"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wind_val" />
+
+    <TextView
+        android:id="@+id/txt_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_forecast_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        android:fontFamily="@font/centurygothic"
+        app:layout_constraintStart_toEndOf="@+id/txt_city"
+        app:layout_constraintTop_toBottomOf="@+id/txt_temp" />
+
+    <TextView
+        android:id="@+id/txt_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txt_city"
+        app:layout_constraintTop_toBottomOf="@+id/txt_min" />
+
+    <TextView
+        android:id="@+id/txt_min_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txt_min"
+        app:layout_constraintTop_toBottomOf="@+id/txt_temp" />
+
+    <TextView
+        android:id="@+id/txt_max_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/centurygothic"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txt_max"
+        app:layout_constraintTop_toBottomOf="@+id/txt_min_val" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

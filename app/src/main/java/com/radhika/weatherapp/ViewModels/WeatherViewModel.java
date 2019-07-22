@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.radhika.weatherapp.Models.Cities;
+import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
 import com.radhika.weatherapp.Network.WeatherAPIRepositary;
 
@@ -18,6 +19,10 @@ public class WeatherViewModel extends ViewModel {
 
     public MutableLiveData<WeatherAPIResult> getWeatherInfo(String cityName){
         return weatherAPIRepositary.getWeatherData(cityName,"9ecde7b8e13078924e82d5bc2a8f48ec");
+    }
+
+    public MutableLiveData<WeatherAPIForecastResult> getWeatherForeCastData(String cityName){
+        return weatherAPIRepositary.getWeatherForeCastData(cityName,"9ecde7b8e13078924e82d5bc2a8f48ec");
     }
 
     public LiveData<List<Cities>> getAllCities(Application activity){

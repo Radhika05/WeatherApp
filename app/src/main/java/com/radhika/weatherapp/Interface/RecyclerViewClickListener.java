@@ -1,4 +1,4 @@
-package com.radhika.weatherapp;
+package com.radhika.weatherapp.Interface;
 
 import android.view.View;
 

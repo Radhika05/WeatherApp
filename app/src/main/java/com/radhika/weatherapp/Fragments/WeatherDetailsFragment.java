@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -21,9 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.radhika.weatherapp.Adapters.CitiesAdapter;
 import com.radhika.weatherapp.Common.FragmentsManager;
 import com.radhika.weatherapp.Models.Cities;
-import com.radhika.weatherapp.Models.WeatherAPIResult;
 import com.radhika.weatherapp.R;
-import com.radhika.weatherapp.RecyclerViewClickListener;
+import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 
 import java.util.List;

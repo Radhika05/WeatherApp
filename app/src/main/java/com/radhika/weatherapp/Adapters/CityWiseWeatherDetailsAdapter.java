@@ -1,6 +1,7 @@
 package com.radhika.weatherapp.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +12,27 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
+import com.radhika.weatherapp.Common.Utils;
+import com.radhika.weatherapp.Models.List;
+import com.radhika.weatherapp.Models.Main;
 import com.radhika.weatherapp.Models.Weather;
+import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+
 public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWiseWeatherDetailsAdapter.ViewHolder> {
 
-    private java.util.List<Weather> weatherList;
+    private java.util.List<List> lists;
     Context context;
+    WeatherAPIForecastResult weatherAPIForecastResult;
 
-    public CityWiseWeatherDetailsAdapter(java.util.List<Weather> weatherList, FragmentActivity activity) {
-        this.weatherList = weatherList;
+    public CityWiseWeatherDetailsAdapter(java.util.List<List> lists, FragmentActivity activity, WeatherAPIForecastResult weatherAPIForecastResult) {
+        this.lists = lists;
         this.context = activity;
+        this.weatherAPIForecastResult =weatherAPIForecastResult;
     }
 
     @NonNull
@@ -35,32 +45,33 @@ public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWise
 
     @Override
     public void onBindViewHolder(@NonNull CityWiseWeatherDetailsAdapter.ViewHolder holder, int position) {
-        Weather weather = weatherList.get(position);
+        Weather weather  = lists.get(position).getWeather().get(0);
         if(weather!=null){
-            holder.tvDate.setText(String.valueOf(weather.getMain()));
-            holder.tvTemp.setText(weather.getDescription());
+            holder.mWeatherTitle.setText(String.valueOf(weather.getMain()));
+            holder.mWeatherDes.setText(weather.getDescription());
             String iconUrl = "http://openweathermap.org/img/w/" + weather.getIcon() + ".png";
-            Picasso.with(context).load(iconUrl).into(holder.imgIcon);
+            Picasso.with(context).load(iconUrl).into(holder.mWeatherIcon);
         }
     }
 
     @Override
     public int getItemCount() {
-        return weatherList.size();
+        return lists.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvDate,tvTemp;
-        private ImageView imgIcon;
+        private TextView mWeatherDes;
+        private Chip mWeatherTitle;
+        private ImageView mWeatherIcon;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             initViews(itemView);
         }
 
         public void initViews(View view){
-            tvDate = view.findViewById(R.id.txt_date);
-            tvTemp = view.findViewById(R.id.txt_temp);
-            imgIcon = view.findViewById(R.id.img_icon);
+            mWeatherDes = view.findViewById(R.id.txt_weather_des);
+            mWeatherTitle = view.findViewById(R.id.cp_weather_title);
+            mWeatherIcon = view.findViewById(R.id.img_weather_icon);
         }
     }
 }

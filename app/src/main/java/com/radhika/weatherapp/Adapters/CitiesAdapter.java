@@ -11,10 +11,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.radhika.weatherapp.Fragments.WeatherDetailsFragment;
 import com.radhika.weatherapp.Models.Cities;
 import com.radhika.weatherapp.R;
-import com.radhika.weatherapp.RecyclerViewClickListener;
+import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 
 import java.util.List;

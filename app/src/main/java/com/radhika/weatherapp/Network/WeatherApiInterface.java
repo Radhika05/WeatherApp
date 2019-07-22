@@ -16,5 +16,6 @@ public interface WeatherApiInterface {
     @GET("weather")
     Call<WeatherAPIResult>getWeatherData(@Query("q") String cityname, @Query("APPID") String APIKey);
 
-    Call<WeatherAPIForecastResult>getWeatherForecastData(@Query("q") String cityName, @Query("appid") String AppID, @Query("count") Integer count);
+    @GET("forecast")
+    Call<WeatherAPIForecastResult>getWeatherForecastData(@Query("q") String cityName, @Query("appid") String AppID);
 }
