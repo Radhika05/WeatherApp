@@ -49,6 +49,7 @@ dependencies {
     implementation "android.arch.lifecycle:viewmodel:1.1.1"
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'android.arch.persistence.room:runtime:1.1.1'
+    implementation 'com.google.android.material:material:1.1.0-alpha08'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 }
