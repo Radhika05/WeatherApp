@@ -1,16 +1,25 @@
 package com.radhika.weatherapp.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    @SerializedName("temp")
     private Double temp;
+    @SerializedName("pressure")
     private Double pressure;
+    @SerializedName("humidity")
     private Integer humidity;
-    private Double tempMin;
-    private Double tempMax;
-    private Double seaLevel;
-    private Double grndLevel;
+    @SerializedName("temp_min")
+    private Double temp_Min;
+    @SerializedName("temp_max")
+    private Double temp_Max;
+    @SerializedName("sea_level")
+    private Double sea_Level;
+    @SerializedName("grnd_level")
+    private Double grnd_Level;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
@@ -35,10 +44,10 @@ public class Main {
         this.temp = temp;
         this.pressure = pressure;
         this.humidity = humidity;
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
-        this.seaLevel = seaLevel;
-        this.grndLevel = grndLevel;
+        this.temp_Min = tempMin;
+        this.temp_Max = tempMax;
+        this.sea_Level = seaLevel;
+        this.grnd_Level = grndLevel;
     }
 
     public Double getTemp() {
@@ -66,35 +75,35 @@ public class Main {
     }
 
     public Double getTempMin() {
-        return tempMin;
+        return temp_Min;
     }
 
     public void setTempMin(Double tempMin) {
-        this.tempMin = tempMin;
+        this.temp_Min = tempMin;
     }
 
     public Double getTempMax() {
-        return tempMax;
+        return temp_Max;
     }
 
     public void setTempMax(Double tempMax) {
-        this.tempMax = tempMax;
+        this.temp_Max = tempMax;
     }
 
     public Double getSeaLevel() {
-        return seaLevel;
+        return sea_Level;
     }
 
     public void setSeaLevel(Double seaLevel) {
-        this.seaLevel = seaLevel;
+        this.sea_Level = seaLevel;
     }
 
     public Double getGrndLevel() {
-        return grndLevel;
+        return grnd_Level;
     }
 
     public void setGrndLevel(Double grndLevel) {
-        this.grndLevel = grndLevel;
+        this.grnd_Level = grndLevel;
     }
 
     public Map<String, Object> getAdditionalProperties() {

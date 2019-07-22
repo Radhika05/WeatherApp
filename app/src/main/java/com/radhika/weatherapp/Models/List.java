@@ -1,5 +1,7 @@
 package com.radhika.weatherapp.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +18,7 @@ public class List {
         this.additionalProperties = additionalProperties;
     }
 
+    @SerializedName("dt_txt")
     private String dtTxt;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

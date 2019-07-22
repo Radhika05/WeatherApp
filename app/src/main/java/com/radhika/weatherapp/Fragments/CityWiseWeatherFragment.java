@@ -65,8 +65,8 @@ public class CityWiseWeatherFragment extends Fragment {
                 List<com.radhika.weatherapp.Models.List> lists = weatherAPIForecastResult.getList();
                 Main main = lists.get(0).getMain();
                 cityWiseWeatherBinding.txtTemp.setText(Utils.convertKelvinToCel(main.getTemp()));
-                //cityWiseWeatherBinding.txtMaxVal.setText(Utils.convertKelvinToCel(main.getTempMax()));
-              //  cityWiseWeatherBinding.txtMinVal.setText(Utils.convertKelvinToCel(main.getTempMin()));
+                cityWiseWeatherBinding.txtMaxVal.setText(Utils.convertKelvinToCel(main.getTempMin()));
+                cityWiseWeatherBinding.txtMinVal.setText(Utils.convertKelvinToCel(main.getTempMin()));
                 CityWiseWeatherDetailsAdapter cityWiseWeatherDetails = new CityWiseWeatherDetailsAdapter(lists,getActivity(),weatherAPIForecastResult);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
                 rvCiyWiseData.setLayoutManager(mLayoutManager);
