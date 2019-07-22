@@ -17,7 +17,7 @@ public class WeatherViewModel extends ViewModel {
     private WeatherAPIRepositary weatherAPIRepositary = new WeatherAPIRepositary();
 
     public MutableLiveData<WeatherAPIResult> getWeatherInfo(String cityName){
-        return weatherAPIRepositary.getCityWiseWeatherReport(cityName);
+        return weatherAPIRepositary.getWeatherData(cityName,"9ecde7b8e13078924e82d5bc2a8f48ec");
     }
 
     public LiveData<List<Cities>> getAllCities(Application activity){

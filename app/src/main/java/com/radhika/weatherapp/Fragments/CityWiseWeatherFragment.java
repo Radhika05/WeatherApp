@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.radhika.weatherapp.Adapters.CityWiseWeatherDetailsAdapter;
+import com.radhika.weatherapp.Models.Weather;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
 import com.radhika.weatherapp.R;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
@@ -50,9 +51,9 @@ public class CityWiseWeatherFragment extends Fragment {
         weatherViewModel.getWeatherInfo(city).observe(this, new Observer<WeatherAPIResult>() {
             @Override
             public void onChanged(WeatherAPIResult weatherAPIResult) {
-                List<com.radhika.weatherapp.Models.List> lists = weatherAPIResult.getList();
-                CityWiseWeatherDetailsAdapter cityWiseWeatherDetails = new CityWiseWeatherDetailsAdapter(lists,getActivity());
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+                List<Weather> weatherList = weatherAPIResult.getWeather();
+                CityWiseWeatherDetailsAdapter cityWiseWeatherDetails = new CityWiseWeatherDetailsAdapter(weatherList,getActivity());
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                 rvCiyWiseData.setLayoutManager(mLayoutManager);
                 rvCiyWiseData.setItemAnimator(new DefaultItemAnimator());
                 rvCiyWiseData.setAdapter(cityWiseWeatherDetails);

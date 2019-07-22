@@ -47,7 +47,6 @@ public class MyCustomDialogFragment extends DialogFragment implements View.OnCli
     @Override
     public void onStart() {
         super.onStart();
-
         Dialog dialog = getDialog();
         if (dialog != null) {
             Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -74,17 +73,12 @@ public class MyCustomDialogFragment extends DialogFragment implements View.OnCli
                 public void onChanged(WeatherAPIResult weatherAPIResult) {
                     assert weatherAPIResult != null;
                     Log.i("weatherAPIResult", weatherAPIResult.toString());
-                    if(weatherAPIResult.getList().size()!=0){
                         Cities cities = new Cities();
-                        cities.setId(weatherAPIResult.getList().get(0).getId());
-                        cities.setName(weatherAPIResult.getList().get(0).getName());
+                        cities.setId(weatherAPIResult.getId());
+                        cities.setName(weatherAPIResult.getName());
                         weatherViewModel.insertCities(cities);
+                        dismiss();
                     }
-                    else{
-                        Toast.makeText(getContext(),"Please enter valid name",Toast.LENGTH_SHORT).show();
-                    }
-                    dismiss();
-                }
             });
         }
     }

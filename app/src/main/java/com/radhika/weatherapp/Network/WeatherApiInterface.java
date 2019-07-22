@@ -10,4 +10,8 @@ public interface WeatherApiInterface {
 
     @GET("forecast")
     Call<WeatherAPIResult> getWeather(@Query("q") String cityName);
+
+
+    @GET("weather")
+    Call<WeatherAPIResult>getWeatherData(@Query("q") String cityname, @Query("APPID") String APIKey);
 }

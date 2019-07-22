@@ -47,7 +47,7 @@ public class WeatherAPIRepositary {
 
     public static Retrofit getInstance() {
         if (retrofit == null) {
-            OkHttpClient okClient = new OkHttpClient.Builder()
+            /*OkHttpClient okClient = new OkHttpClient.Builder()
                     .addInterceptor(
                             new Interceptor() {
                                 @Override
@@ -64,11 +64,11 @@ public class WeatherAPIRepositary {
                                     return chain.proceed(request);
                                 }
                             })
-                    .build();
-            String baseUrl = "https://community-open-weather-map.p.rapidapi.com";
+                    .build();*/
+            //String baseUrl = "https://community-open-weather-map.p.rapidapi.com";
+            String baseUrl = "http://api.openweathermap.org/data/2.5/";
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .client(okClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
@@ -79,8 +79,8 @@ public class WeatherAPIRepositary {
         return getInstance().create(WeatherApiInterface.class);
     }
 
-    public MutableLiveData<WeatherAPIResult> getCityWiseWeatherReport(String cityName) {
-        final Call<WeatherAPIResult> weatherAPIResultCall = getAPIService().getWeather(cityName);
+    public MutableLiveData<WeatherAPIResult> getWeatherData(String cityName,String AppId) {
+        final Call<WeatherAPIResult> weatherAPIResultCall = getAPIService().getWeatherData(cityName,AppId);
         weatherAPIResultCall.enqueue(new Callback<WeatherAPIResult>() {
             @Override
             public void onResponse(Call<WeatherAPIResult> call, retrofit2.Response<WeatherAPIResult> response) {

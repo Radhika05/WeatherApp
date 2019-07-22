@@ -4,15 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Coord {
-    private Double lat;
     private Double lon;
+    private Double lat;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
+    /**
+     *
+     * @param lon
+     * @param lat
+     */
+    public Coord(Double lon, Double lat) {
+        super();
+        this.lon = lon;
         this.lat = lat;
     }
 
@@ -22,6 +25,14 @@ public class Coord {
 
     public void setLon(Double lon) {
         this.lon = lon;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
     public Map<String, Object> getAdditionalProperties() {

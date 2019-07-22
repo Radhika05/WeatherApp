@@ -11,18 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.radhika.weatherapp.Models.List;
 import com.radhika.weatherapp.Models.Weather;
 import com.radhika.weatherapp.R;
 import com.squareup.picasso.Picasso;
 
 public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWiseWeatherDetailsAdapter.ViewHolder> {
 
-    private java.util.List<List> listLists;
+    private java.util.List<Weather> weatherList;
     Context context;
 
-    public CityWiseWeatherDetailsAdapter(java.util.List<List> lists, FragmentActivity activity) {
-        this.listLists = lists;
+    public CityWiseWeatherDetailsAdapter(java.util.List<Weather> weatherList, FragmentActivity activity) {
+        this.weatherList = weatherList;
         this.context = activity;
     }
 
@@ -36,18 +35,18 @@ public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWise
 
     @Override
     public void onBindViewHolder(@NonNull CityWiseWeatherDetailsAdapter.ViewHolder holder, int position) {
-        java.util.List<Weather> weather = listLists.get(position).getWeather();
-        if(listLists!=null){
-            holder.tvDate.setText(String.valueOf(listLists.get(position).getDt_txt()));
-            holder.tvTemp.setText(weather.get(0).getDescription());
-            String iconUrl = "http://openweathermap.org/img/w/" + weather.get(0).getIcon() + ".png";
+        Weather weather = weatherList.get(position);
+        if(weather!=null){
+            holder.tvDate.setText(String.valueOf(weather.getMain()));
+            holder.tvTemp.setText(weather.getDescription());
+            String iconUrl = "http://openweathermap.org/img/w/" + weather.getIcon() + ".png";
             Picasso.with(context).load(iconUrl).into(holder.imgIcon);
         }
     }
 
     @Override
     public int getItemCount() {
-        return listLists.size();
+        return weatherList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

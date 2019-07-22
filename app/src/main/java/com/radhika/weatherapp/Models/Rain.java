@@ -3,24 +3,32 @@ package com.radhika.weatherapp.Models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Clouds {
-    private Integer all;
+public class Rain {
+    private Double _3h;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Rain() {
+    }
+
     /**
      *
-     * @param all
+     * @param _3h
      */
-    public Clouds(Integer all) {
+    public Rain(Double _3h) {
         super();
-        this.all = all;
+        this._3h = _3h;
     }
 
-    public Integer getAll() {
-        return all;
+    public Double get3h() {
+        return _3h;
     }
 
-    public void setAll(Integer all) {
-        this.all = all;
+    public void set3h(Double _3h) {
+        this._3h = _3h;
     }
 
     public Map<String, Object> getAdditionalProperties() {

@@ -3,13 +3,43 @@ package com.radhika.weatherapp.Models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main_ {
+public class Main {
     private Double temp;
     private Double pressure;
     private Integer humidity;
     private Double tempMin;
     private Double tempMax;
+    private Double seaLevel;
+    private Double grndLevel;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Main() {
+    }
+
+    /**
+     *
+     * @param seaLevel
+     * @param humidity
+     * @param pressure
+     * @param grndLevel
+     * @param tempMax
+     * @param temp
+     * @param tempMin
+     */
+    public Main(Double temp, Double pressure, Integer humidity, Double tempMin, Double tempMax, Double seaLevel, Double grndLevel) {
+        super();
+        this.temp = temp;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.tempMin = tempMin;
+        this.tempMax = tempMax;
+        this.seaLevel = seaLevel;
+        this.grndLevel = grndLevel;
+    }
 
     public Double getTemp() {
         return temp;
@@ -51,6 +81,22 @@ public class Main_ {
         this.tempMax = tempMax;
     }
 
+    public Double getSeaLevel() {
+        return seaLevel;
+    }
+
+    public void setSeaLevel(Double seaLevel) {
+        this.seaLevel = seaLevel;
+    }
+
+    public Double getGrndLevel() {
+        return grndLevel;
+    }
+
+    public void setGrndLevel(Double grndLevel) {
+        this.grndLevel = grndLevel;
+    }
+
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -58,4 +104,5 @@ public class Main_ {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
 }

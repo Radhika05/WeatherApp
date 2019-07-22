@@ -8,6 +8,24 @@ public class Wind {
     private Double deg;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Wind() {
+    }
+
+    /**
+     *
+     * @param speed
+     * @param deg
+     */
+    public Wind(Double speed, Double deg) {
+        super();
+        this.speed = speed;
+        this.deg = deg;
+    }
+
     public Double getSpeed() {
         return speed;
     }
@@ -31,5 +49,4 @@ public class Wind {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }
