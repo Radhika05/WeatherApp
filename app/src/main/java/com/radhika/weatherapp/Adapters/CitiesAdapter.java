@@ -55,7 +55,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                weatherViewModel.setCity(city.getName());
+                int position = holder.getLayoutPosition();
+                weatherViewModel.setCity(lstCities.get(position).getName());
                 recyclerViewClickListener.onClick();
             }
         });

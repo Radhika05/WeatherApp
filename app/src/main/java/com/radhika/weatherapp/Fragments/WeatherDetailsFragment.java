@@ -36,7 +36,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
     private RecyclerView rvCities;
     private SwipeRefreshLayout swipeRefreshLayout;
     private WeatherViewModel weatherViewModel;
-    List<Cities> lstCities;
+    private List<Cities> lstCities;
 
     @NonNull
     @Override
@@ -66,7 +66,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
             public void onClick() {
                 try {
                     CityWiseWeatherFragment cityWiseWeatherFragment = new CityWiseWeatherFragment();
-                    FragmentsManager.replaceFragment(getActivity(), cityWiseWeatherFragment, R.id.fragment_container, false);
+                    FragmentsManager.addFragment(getActivity(), cityWiseWeatherFragment, R.id.fragment_container, true);
                 } catch (Exception error) {
                     Log.d("error", error.toString());
                 }

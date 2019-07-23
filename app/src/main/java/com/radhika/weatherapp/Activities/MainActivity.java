@@ -2,6 +2,7 @@ package com.radhika.weatherapp.Activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -13,6 +14,8 @@ import com.radhika.weatherapp.R;
 import com.radhika.weatherapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private boolean doubleBackToExitPressedOnce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +32,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             MyCustomDialogFragment myCustomDialogFragment = new MyCustomDialogFragment();
             myCustomDialogFragment.show(getSupportFragmentManager(), "example");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if(count==0){
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            super.onBackPressed();
+        }
+
     }
 }

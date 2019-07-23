@@ -57,7 +57,7 @@ public class WeatherAPIRepositary {
 
 
     public MutableLiveData<WeatherAPIForecastResult> getWeatherForeCastData(String cityName, String AppId) {
-        final Call<WeatherAPIForecastResult> weatherAPIResultCall = getAPIService().getWeatherForecastData(cityName, AppId);
+        final Call<WeatherAPIForecastResult> weatherAPIResultCall = getAPIService().getWeatherForecastData(cityName, AppId,"metric");
         weatherAPIResultCall.enqueue(new Callback<WeatherAPIForecastResult>() {
             @Override
             public void onResponse(Call<WeatherAPIForecastResult> call, Response<WeatherAPIForecastResult> response) {

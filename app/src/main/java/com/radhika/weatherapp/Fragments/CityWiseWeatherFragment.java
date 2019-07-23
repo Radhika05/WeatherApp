@@ -1,6 +1,7 @@
 package com.radhika.weatherapp.Fragments;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 import com.radhika.weatherapp.databinding.FragmentCityWiseWeatherBinding;
 
 import java.io.UTFDataFormatException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,20 +61,42 @@ public class CityWiseWeatherFragment extends Fragment {
 
     private void bindRecyclerView(String city){
         weatherViewModel.getWeatherForeCastData(city).observe(this, new Observer<WeatherAPIForecastResult>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(WeatherAPIForecastResult weatherAPIForecastResult) {
-                List<com.radhika.weatherapp.Models.List> lists = weatherAPIForecastResult.getList();
-                Main main = lists.get(0).getMain();
-                cityWiseWeatherBinding.txtTemp.setText(Utils.convertKelvinToCel(main.getTemp()));
-                cityWiseWeatherBinding.txtMaxVal.setText(Utils.convertKelvinToCel(main.getTempMin()));
-                cityWiseWeatherBinding.txtMinVal.setText(Utils.convertKelvinToCel(main.getTempMin()));
-                CityWiseWeatherDetailsAdapter cityWiseWeatherDetails = new CityWiseWeatherDetailsAdapter(lists,getActivity(),weatherAPIForecastResult);
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-                rvCiyWiseData.setLayoutManager(mLayoutManager);
-                rvCiyWiseData.setItemAnimator(new DefaultItemAnimator());
-                rvCiyWiseData.setAdapter(cityWiseWeatherDetails);
+                BindView(weatherAPIForecastResult);
             }
         });
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void BindView(WeatherAPIForecastResult weatherAPIForecastResult) {
+        List<com.radhika.weatherapp.Models.List> todaysList;
+        List<com.radhika.weatherapp.Models.List> upComingList;
+        List<com.radhika.weatherapp.Models.List> lists = weatherAPIForecastResult.getList();
+        Main main = lists.get(0).getMain();
+        cityWiseWeatherBinding.txtCity.setText(weatherAPIForecastResult.getCity().getName());
+        cityWiseWeatherBinding.txtTemp.setText(String.valueOf(Math.round(main.getTemp()))+ (char) 0x00B0);
+        cityWiseWeatherBinding.txtMaxVal.setText(String.valueOf(Math.round(main.getTempMax())) + (char) 0x00B0);
+        cityWiseWeatherBinding.txtMinVal.setText(String.valueOf(Math.round(main.getTempMin()))+ (char) 0x00B0);
+        cityWiseWeatherBinding.txtHumidityVal.setText(main.getHumidity() + " %");
+        cityWiseWeatherBinding.txtWindVal.setText(lists.get(0).getWind().getSpeed() + " m/sec");
+        try {
+            cityWiseWeatherBinding.txtDate.setText(Utils.getDayFromDate(lists.get(0).getDtTxt()));
+            cityWiseWeatherBinding.txtTime.setText(Utils.getTimeFromString(lists.get(0).getDtTxt()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        for(int i=0;i<lists.size();i++){
+
+        }
+        CityWiseWeatherDetailsAdapter cityWiseWeatherDetails = new CityWiseWeatherDetailsAdapter(lists,getActivity(),weatherAPIForecastResult);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        rvCiyWiseData.setLayoutManager(mLayoutManager);
+        rvCiyWiseData.setItemAnimator(new DefaultItemAnimator());
+        rvCiyWiseData.setAdapter(cityWiseWeatherDetails);
 
     }
 

@@ -35,9 +35,8 @@ public class WeatherViewModel extends ViewModel {
         weatherAPIRepositary.insert(cities);
     }
 
-    public boolean setCity(String city) {
+    public void setCity(String city) {
         cities.setValue(city);
-        return true;
     }
 
     public MutableLiveData<String> getCity() {

@@ -9,12 +9,14 @@
     android:layout_marginTop="@dimen/mtrl_card_spacing"
     android:layout_marginRight="@dimen/mtrl_card_spacing"
     android:minHeight="@dimen/_100sdp"
+    android:minWidth="@dimen/_100sdp"
     tools:ignore="PrivateResource">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="@dimen/_100sdp"
         android:minHeight="@dimen/_100sdp">
 
         <com.google.android.material.chip.Chip

@@ -1,18 +1,14 @@
 package com.radhika.weatherapp.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Rain {
+    @SerializedName("3h")
     private Double _3h;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-    public Rain() {
-    }
 
     /**
      *
@@ -24,7 +20,13 @@ public class Rain {
     }
 
     public Double get3h() {
-        return _3h;
+        Double val = 0d;
+        if(_3h!=null){
+            return _3h;
+        }
+        else {
+            return val;
+        }
     }
 
     public void set3h(Double _3h) {

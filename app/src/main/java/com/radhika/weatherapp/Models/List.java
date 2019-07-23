@@ -13,14 +13,15 @@ public class List {
     private Wind wind;
     private Rain rain;
     private Sys sys;
+    @SerializedName("dt_txt")
+    private String dtTxt;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public void setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
     }
 
-    @SerializedName("dt_txt")
-    private String dtTxt;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * No args constructor for use in serialization

@@ -21,13 +21,13 @@ import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.R;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
+
 
 public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWiseWeatherDetailsAdapter.ViewHolder> {
 
     private java.util.List<List> lists;
-    Context context;
-    WeatherAPIForecastResult weatherAPIForecastResult;
+    private Context context;
+    private WeatherAPIForecastResult weatherAPIForecastResult;
 
     public CityWiseWeatherDetailsAdapter(java.util.List<List> lists, FragmentActivity activity, WeatherAPIForecastResult weatherAPIForecastResult) {
         this.lists = lists;
