@@ -62,6 +62,10 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         });
     }
 
+    public void setLstCities(List<Cities> lstCities){
+        this.lstCities = lstCities;
+    }
+
     @Override
     public int getItemCount() {
         return lstCities.size();

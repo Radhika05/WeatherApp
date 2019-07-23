@@ -30,7 +30,7 @@ public class WeatherAPIRepositary {
     private LiveData<List<Cities>> allCities;
     private MutableLiveData<WeatherAPIResult> weatherAPIResultMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<WeatherAPIForecastResult> weatherAPIForecastResultMutableLiveData = new MutableLiveData<>();
-    MutableLiveData<WeatherAPIResultList> lstweatherAPIResultMutableLiveData;
+    private MutableLiveData<WeatherAPIResultList> lstweatherAPIResultMutableLiveData = new MutableLiveData<>();
 
     public WeatherAPIRepositary(Application activity) {
         WeatherDatabase weatherDatabase = WeatherDatabase.getInstance(activity);

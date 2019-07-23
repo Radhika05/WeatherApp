@@ -60,7 +60,6 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
     }
 
     private void bindRecyclerView(List<Cities> cities) {
-        swipeRefreshLayout.setRefreshing(true);
         CitiesAdapter cityAdapter = new CitiesAdapter(cities, new RecyclerViewClickListener() {
             @Override
             public void onClick() {
@@ -76,7 +75,6 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
         rvCities.setLayoutManager(mLayoutManager);
         rvCities.setItemAnimator(new DefaultItemAnimator());
         rvCities.setAdapter(cityAdapter);
-        swipeRefreshLayout.setRefreshing(false);
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -85,10 +83,16 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                weatherViewModel.delete(cityAdapter.getCityAt(viewHolder.getAdapterPosition()));
+                int position = viewHolder.getAdapterPosition();
+                weatherViewModel.delete(cityAdapter.getCityAt(position));
+                lstCities.remove(position);
+                cityAdapter.notifyItemRemoved(position);
+                cityAdapter.notifyItemChanged(position, lstCities.size());
+                cityAdapter.notifyDataSetChanged();
                 Toast.makeText(getContext(), "City deleted successfully.", Toast.LENGTH_LONG).show();
             }
         }).attachToRecyclerView(rvCities);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void initViews(View view) {
