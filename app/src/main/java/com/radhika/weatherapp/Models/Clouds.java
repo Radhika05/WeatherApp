@@ -7,10 +7,7 @@ public class Clouds {
 
     private Integer all;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    /**
-     *
-     * @param all
-     */
+
     public Clouds(Integer all) {
         super();
         this.all = all;

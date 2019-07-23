@@ -12,9 +12,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.Models.Cities;
 import com.radhika.weatherapp.R;
-import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +31,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         this.recyclerViewClickListener = recyclerViewClickListener;
         this.lstCities = lstCities;
         Context context = activity;
-        weatherViewModel = ViewModelProviders.of((FragmentActivity) activity).get(WeatherViewModel.class);
+        weatherViewModel = ViewModelProviders.of(activity).get(WeatherViewModel.class);
     }
 
     @NonNull
@@ -62,7 +62,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         });
     }
 
-    public void setLstCities(List<Cities> lstCities){
+    public void setLstCities(List<Cities> lstCities) {
         this.lstCities = lstCities;
     }
 

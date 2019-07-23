@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -26,17 +25,13 @@ import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 import com.radhika.weatherapp.databinding.FragmentCityWiseWeatherBinding;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import static com.radhika.weatherapp.Common.Utils.getDateFromDateTimeString;
-
 
 public class CityWiseWeatherFragment extends Fragment {
 
@@ -51,7 +46,6 @@ public class CityWiseWeatherFragment extends Fragment {
                 inflater, R.layout.fragment_city_wise_weather, container, false);
         View view = cityWiseWeatherBinding.getRoot();
         initViews(view);
-
 
         weatherViewModel.getCity().observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
             @Override

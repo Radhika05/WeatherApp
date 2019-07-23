@@ -10,13 +10,7 @@ public class Weather {
     private String description;
     private String icon;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    /**
-     *
-     * @param id
-     * @param icon
-     * @param description
-     * @param main
-     */
+
     public Weather(Integer id, String main, String description, String icon) {
         super();
         this.id = id;

@@ -57,7 +57,7 @@ public class WeatherAPIRepositary {
 
 
     public MutableLiveData<WeatherAPIForecastResult> getWeatherForeCastData(String cityName, String AppId) {
-        final Call<WeatherAPIForecastResult> weatherAPIResultCall = getAPIService().getWeatherForecastData(cityName, AppId,"metric");
+        final Call<WeatherAPIForecastResult> weatherAPIResultCall = getAPIService().getWeatherForecastData(cityName, AppId, "metric");
         weatherAPIResultCall.enqueue(new Callback<WeatherAPIForecastResult>() {
             @Override
             public void onResponse(Call<WeatherAPIForecastResult> call, Response<WeatherAPIForecastResult> response) {
@@ -77,7 +77,7 @@ public class WeatherAPIRepositary {
         weatherAPIResultCall.enqueue(new Callback<WeatherAPIResult>() {
             @Override
             public void onResponse(Call<WeatherAPIResult> call, retrofit2.Response<WeatherAPIResult> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     weatherAPIResultMutableLiveData.postValue(response.body());
                 }
             }
@@ -145,8 +145,7 @@ public class WeatherAPIRepositary {
 
 
     public String checkCityExist(String city) {
-       // return  new checkCityExistAsync(weatherDao).execute(city);
-       return weatherDao.checkCityExist(city);
+        return weatherDao.checkCityExist(city);
     }
 
     public static class InsertCityAsync extends AsyncTask<Cities, Void, Void> {
@@ -183,6 +182,7 @@ public class WeatherAPIRepositary {
         private DeleteCityAsync(WeatherDao weatherDao) {
             this.weatherDao = weatherDao;
         }
+
         @Override
         protected Void doInBackground(Cities... cities) {
             weatherDao.delete(cities[0]);

@@ -22,21 +22,9 @@ public class Main {
     private Double grnd_Level;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     * No args constructor for use in serialization
-     */
     public Main() {
     }
 
-    /**
-     * @param seaLevel
-     * @param humidity
-     * @param pressure
-     * @param grndLevel
-     * @param tempMax
-     * @param temp
-     * @param tempMin
-     */
     public Main(Double temp, Double pressure, Integer humidity, Double tempMin, Double tempMax, Double seaLevel, Double grndLevel) {
         super();
         this.temp = temp;

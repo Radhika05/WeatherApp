@@ -11,21 +11,9 @@ public class WeatherAPIForecastResult {
     private City city;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
     public WeatherAPIForecastResult() {
     }
 
-    /**
-     *
-     * @param message
-     * @param cnt
-     * @param cod
-     * @param list
-     * @param city
-     */
     public WeatherAPIForecastResult(String cod, Double message, Integer cnt, java.util.List<List> list, City city) {
         super();
         this.cod = cod;

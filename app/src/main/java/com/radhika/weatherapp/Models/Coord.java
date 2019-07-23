@@ -8,11 +8,6 @@ public class Coord {
     private Double lat;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     *
-     * @param lon
-     * @param lat
-     */
     public Coord(Double lon, Double lat) {
         super();
         this.lon = lon;

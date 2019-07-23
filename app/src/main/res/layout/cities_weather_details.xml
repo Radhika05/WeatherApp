@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorGrey"
     android:layout_marginEnd="@dimen/_8sdp"
-    android:minHeight="@dimen/_100sdp"
+    android:background="@color/colorGrey"
     android:minWidth="@dimen/_100sdp"
+    android:minHeight="@dimen/_100sdp"
     tools:ignore="PrivateResource">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -22,9 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/cp_weather_title"
@@ -32,8 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:background="@color/design_default_color_secondary"
             android:layout_marginEnd="20dp"
+            android:background="@color/design_default_color_secondary"
             android:fontFamily="@font/centurygothic"
             android:text="@string/chip_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,21 +46,21 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cp_weather_title"
-            app:srcCompat="@drawable/app_icon"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/app_icon" />
 
         <TextView
             android:id="@+id/txt_weather_des"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/centurygothic"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/centurygothic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

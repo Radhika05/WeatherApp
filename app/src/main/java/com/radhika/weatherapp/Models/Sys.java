@@ -10,14 +10,6 @@ public class Sys {
     private Integer sunset;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-
-    /**
-     *
-     * @param message
-     * @param sunset
-     * @param sunrise
-     * @param country
-     */
     public Sys(Double message, String country, Integer sunrise, Integer sunset) {
         super();
         this.message = message;

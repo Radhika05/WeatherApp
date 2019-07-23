@@ -19,22 +19,7 @@ public class WeatherAPIResult {
     private String name;
     private Integer cod;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    /**
-     *
-     * @param id
-     * @param dt
-     * @param clouds
-     * @param coord
-     * @param wind
-     * @param timezone
-     * @param cod
-     * @param sys
-     * @param name
-     * @param base
-     * @param weather
-     * @param rain
-     * @param main
-     */
+
     public WeatherAPIResult(Coord coord, List<Weather> weather, String base, Main main, Wind wind, Rain rain, Clouds clouds, Integer dt, Sys sys, Integer timezone, Integer id, String name, Integer cod) {
         super();
         this.coord = coord;

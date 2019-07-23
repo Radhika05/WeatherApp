@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.radhika.weatherapp.Adapters.CitiesAdapter;
 import com.radhika.weatherapp.Common.FragmentsManager;
+import com.radhika.weatherapp.Common.Utils;
 import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.Models.Cities;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
@@ -37,6 +39,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
     private SwipeRefreshLayout swipeRefreshLayout;
     private WeatherViewModel weatherViewModel;
     private List<Cities> lstCities;
+    TextView tvError;
 
     @NonNull
     @Override
@@ -49,9 +52,11 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
             public void onChanged(List<Cities> cities) {
                 lstCities = cities;
                 if (cities == null || cities.size() == 0) {
+                    tvError.setVisibility(View.VISIBLE);
                     swipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(getActivity(), "No City Added", Toast.LENGTH_SHORT).show();
                 } else {
+                    tvError.setVisibility(View.GONE);
                     bindRecyclerView(cities);
                 }
             }
@@ -64,8 +69,12 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
             @Override
             public void onClick() {
                 try {
-                    CityWiseWeatherFragment cityWiseWeatherFragment = new CityWiseWeatherFragment();
-                    FragmentsManager.addFragment(getActivity(), cityWiseWeatherFragment, R.id.fragment_container, true);
+                    if (Utils.isOnline(getContext())) {
+                        CityWiseWeatherFragment cityWiseWeatherFragment = new CityWiseWeatherFragment();
+                        FragmentsManager.addFragment(getActivity(), cityWiseWeatherFragment, R.id.fragment_container, true);
+                    } else {
+                        Toast.makeText(getContext(), "Please make sure you are connected to Internet!", Toast.LENGTH_LONG).show();
+                    }
                 } catch (Exception error) {
                     Log.d("error", error.toString());
                 }
@@ -86,6 +95,11 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
                 int position = viewHolder.getAdapterPosition();
                 weatherViewModel.delete(cityAdapter.getCityAt(position));
                 lstCities.remove(position);
+                if (lstCities != null && lstCities.size() > 0) {
+                    tvError.setVisibility(View.GONE);
+                } else {
+                    tvError.setVisibility(View.VISIBLE);
+                }
                 cityAdapter.notifyItemRemoved(position);
                 cityAdapter.notifyItemChanged(position, lstCities.size());
                 cityAdapter.notifyDataSetChanged();
@@ -101,34 +115,42 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
         swipeRefreshLayout = view.findViewById(R.id.swp_city_list);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.MAGENTA, Color.RED, Color.GREEN);
+        tvError = view.findViewById(R.id.tv_error);
     }
 
     @Override
     public void onRefresh() {
-        swipeRefreshLayout.setRefreshing(true);
-        if (lstCities != null && lstCities.size() > 0) {
-            StringBuilder cityId = new StringBuilder();
-            for (int index = 0; index < (lstCities.size() > 20 ? 20 : lstCities.size()); index++) {
-                cityId.append(lstCities.get(index).getCityId()).append(",");
-            }
-            cityId = new StringBuilder(cityId.substring(0, cityId.length() - 1));
-            weatherViewModel.updateWeatherInfo(cityId.toString()).observe(this, new Observer<WeatherAPIResultList>() {
-                @Override
-                public void onChanged(WeatherAPIResultList weatherAPIResultList) {
-                    List<Cities> lstCity = new ArrayList<>();
-                    for (WeatherAPIResult weatherAPIResult : weatherAPIResultList.getList()) {
-                        Cities cities = new Cities();
-                        cities.setCityId(weatherAPIResult.getId());
-                        cities.setTemperature(weatherAPIResult.getMain().getTemp() + 273.15);
-                        cities.setDescription(weatherAPIResult.getWeather().get(0).getDescription());
-                        cities.setIcon(weatherAPIResult.getWeather().get(0).getIcon());
-                        cities.setName(weatherAPIResult.getName());
-                        weatherViewModel.updateCities(cities);
-                        lstCity.add(cities);
-                    }
-                    bindRecyclerView(lstCity);
+        if (Utils.isOnline(getContext())) {
+            swipeRefreshLayout.setRefreshing(true);
+            if (lstCities != null && lstCities.size() > 0) {
+                tvError.setVisibility(View.GONE);
+                StringBuilder cityId = new StringBuilder();
+                for (int index = 0; index < (lstCities.size() > 20 ? 20 : lstCities.size()); index++) {
+                    cityId.append(lstCities.get(index).getCityId()).append(",");
                 }
-            });
+                cityId = new StringBuilder(cityId.substring(0, cityId.length() - 1));
+                weatherViewModel.updateWeatherInfo(cityId.toString()).observe(this, new Observer<WeatherAPIResultList>() {
+                    @Override
+                    public void onChanged(WeatherAPIResultList weatherAPIResultList) {
+                        List<Cities> lstCity = new ArrayList<>();
+                        for (WeatherAPIResult weatherAPIResult : weatherAPIResultList.getList()) {
+                            Cities cities = new Cities();
+                            cities.setCityId(weatherAPIResult.getId());
+                            cities.setTemperature(weatherAPIResult.getMain().getTemp() + 273.15);
+                            cities.setDescription(weatherAPIResult.getWeather().get(0).getDescription());
+                            cities.setIcon(weatherAPIResult.getWeather().get(0).getIcon());
+                            cities.setName(weatherAPIResult.getName());
+                            weatherViewModel.updateCities(cities);
+                            lstCity.add(cities);
+                        }
+                        bindRecyclerView(lstCity);
+                    }
+                });
+            } else {
+                tvError.setVisibility(View.VISIBLE);
+            }
+        } else {
+            Toast.makeText(getContext(), "Please make sure you are connected to Internet!", Toast.LENGTH_LONG).show();
         }
     }
 }

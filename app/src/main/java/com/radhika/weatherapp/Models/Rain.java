@@ -10,10 +10,6 @@ public class Rain {
     private Double _3h;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     *
-     * @param _3h
-     */
     public Rain(Double _3h) {
         super();
         this._3h = _3h;
@@ -21,10 +17,9 @@ public class Rain {
 
     public Double get3h() {
         Double val = 0d;
-        if(_3h!=null){
+        if (_3h != null) {
             return _3h;
-        }
-        else {
+        } else {
             return val;
         }
     }

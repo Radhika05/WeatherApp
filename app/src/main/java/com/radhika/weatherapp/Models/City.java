@@ -12,22 +12,9 @@ public class City {
     private Integer timezone;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
     public City() {
     }
 
-    /**
-     *
-     * @param coord
-     * @param id
-     * @param timezone
-     * @param name
-     * @param population
-     * @param country
-     */
     public City(Integer id, String name, Coord coord, String country, Integer population, Integer timezone) {
         super();
         this.id = id;

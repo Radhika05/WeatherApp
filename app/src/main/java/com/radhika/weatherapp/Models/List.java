@@ -21,26 +21,9 @@ public class List {
         this.additionalProperties = additionalProperties;
     }
 
-
-
-    /**
-     * No args constructor for use in serialization
-     *
-     */
     public List() {
     }
 
-    /**
-     *
-     * @param clouds
-     * @param dt
-     * @param wind
-     * @param sys
-     * @param dtTxt
-     * @param weather
-     * @param rain
-     * @param main
-     */
     public List(Integer dt, Main main, java.util.List<Weather> weather, Clouds clouds, Wind wind, Rain rain, Sys sys, String dtTxt) {
         super();
         this.dt = dt;

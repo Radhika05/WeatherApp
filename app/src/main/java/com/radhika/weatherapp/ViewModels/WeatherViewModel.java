@@ -1,7 +1,6 @@
 package com.radhika.weatherapp.ViewModels;
 
 import android.app.Application;
-import android.text.Editable;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,25 +19,25 @@ public class WeatherViewModel extends ViewModel {
     private WeatherAPIRepositary weatherAPIRepositary = new WeatherAPIRepositary();
     private LiveData<List<Cities>> listCities;
 
-    public MutableLiveData<WeatherAPIResult> getWeatherInfo(String cityName){
-        return weatherAPIRepositary.getWeatherData(cityName,"9ecde7b8e13078924e82d5bc2a8f48ec");
+    public MutableLiveData<WeatherAPIResult> getWeatherInfo(String cityName) {
+        return weatherAPIRepositary.getWeatherData(cityName, "9ecde7b8e13078924e82d5bc2a8f48ec");
     }
 
-    public MutableLiveData<WeatherAPIForecastResult> getWeatherForeCastData(String cityName){
-        return weatherAPIRepositary.getWeatherForeCastData(cityName,"9ecde7b8e13078924e82d5bc2a8f48ec");
+    public MutableLiveData<WeatherAPIForecastResult> getWeatherForeCastData(String cityName) {
+        return weatherAPIRepositary.getWeatherForeCastData(cityName, "9ecde7b8e13078924e82d5bc2a8f48ec");
     }
 
-    public LiveData<List<Cities>> getAllCities(Application activity){
+    public LiveData<List<Cities>> getAllCities(Application activity) {
         weatherAPIRepositary = new WeatherAPIRepositary(activity);
         listCities = weatherAPIRepositary.getAllCities();
         return listCities;
     }
 
-    public void insertCities(Cities cities){
+    public void insertCities(Cities cities) {
         weatherAPIRepositary.insert(cities);
     }
 
-    public void insertOrUpdate(Cities cities){
+    public void insertOrUpdate(Cities cities) {
         weatherAPIRepositary.insertOrUpdate(cities);
     }
 
@@ -51,7 +50,7 @@ public class WeatherViewModel extends ViewModel {
     }
 
     public MutableLiveData<WeatherAPIResultList> updateWeatherInfo(String cityId) {
-        return weatherAPIRepositary.updateWeatherInfo(cityId,"9ecde7b8e13078924e82d5bc2a8f48ec");
+        return weatherAPIRepositary.updateWeatherInfo(cityId, "9ecde7b8e13078924e82d5bc2a8f48ec");
     }
 
     public void updateCities(Cities cities) {
@@ -63,7 +62,7 @@ public class WeatherViewModel extends ViewModel {
     }
 
     public String checkCityExist(String city) {
-       return weatherAPIRepositary.checkCityExist(city);
+        return weatherAPIRepositary.checkCityExist(city);
     }
 
 }
