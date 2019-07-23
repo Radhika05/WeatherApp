@@ -2,6 +2,10 @@ package com.radhika.weatherapp.Fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -11,11 +15,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.radhika.weatherapp.Adapters.CityWiseWeatherDetailsAdapter;
 import com.radhika.weatherapp.Common.Utils;
@@ -51,7 +50,7 @@ public class CityWiseWeatherFragment extends Fragment {
         weatherViewModel.getCity().observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
             @Override
             public void onChanged(String city) {
-                Log.d("onChannges",city);
+                Log.d("onChannges", city);
                 bindRecyclerView(city);
             }
         });

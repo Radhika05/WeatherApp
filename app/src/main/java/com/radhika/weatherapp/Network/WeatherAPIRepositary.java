@@ -12,6 +12,7 @@ import com.radhika.weatherapp.Database.WeatherDatabase;
 import com.radhika.weatherapp.Models.Cities;
 import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
+import com.radhika.weatherapp.Models.WeatherAPIResultList;
 
 import java.util.List;
 
@@ -23,20 +24,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherAPIRepositary {
 
+    private WeatherAPIRepositary instance;
     private static Retrofit retrofit;
     private static WeatherDao weatherDao;
-    private WeatherAPIRepositary instance;
     private LiveData<List<Cities>> allCities;
     private MutableLiveData<WeatherAPIResult> weatherAPIResultMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<WeatherAPIForecastResult> weatherAPIForecastResultMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<WeatherAPIResultList> lstweatherAPIResultMutableLiveData;
 
     public WeatherAPIRepositary(Application activity) {
         WeatherDatabase weatherDatabase = WeatherDatabase.getInstance(activity);
         weatherDao = weatherDatabase.weatherDao();
     }
 
-    public WeatherAPIRepositary(){
-
+    public WeatherAPIRepositary() {
     }
 
     private static Retrofit getInstance() {
@@ -85,6 +86,26 @@ public class WeatherAPIRepositary {
             }
         });
         return getResponse();
+    }
+
+    public MutableLiveData<WeatherAPIResultList> updateWeatherInfo(String cityId, String appId) {
+        final Call<WeatherAPIResultList> weatherAPIResultCall = getAPIService().updateWeatherInfo(cityId, "metric", appId);
+        weatherAPIResultCall.enqueue(new Callback<WeatherAPIResultList>() {
+            @Override
+            public void onResponse(Call<WeatherAPIResultList> call, retrofit2.Response<WeatherAPIResultList> response) {
+                lstweatherAPIResultMutableLiveData.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<WeatherAPIResultList> call, Throwable t) {
+                Log.i("failure", t.toString());
+            }
+        });
+        return getResponseList();
+    }
+
+    private MutableLiveData<WeatherAPIResultList> getResponseList() {
+        return lstweatherAPIResultMutableLiveData;
     }
 
     private MutableLiveData<WeatherAPIResult> getResponse() {

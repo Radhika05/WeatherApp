@@ -24,13 +24,11 @@ public class Main {
 
     /**
      * No args constructor for use in serialization
-     *
      */
     public Main() {
     }
 
     /**
-     *
      * @param seaLevel
      * @param humidity
      * @param pressure

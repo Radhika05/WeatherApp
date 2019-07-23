@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         WeatherDetailsFragment weatherDetailsFragment =  new WeatherDetailsFragment();
         FragmentsManager.replaceFragment(this,weatherDetailsFragment,R.id.fragment_container,false);
         binding.fbAdd.setOnClickListener(this);
-
     }
 
     @Override

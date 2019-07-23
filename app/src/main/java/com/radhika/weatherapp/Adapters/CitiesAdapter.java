@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.radhika.weatherapp.Models.Cities;
 import com.radhika.weatherapp.R;
 import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.ViewModels.WeatherViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         this.recyclerViewClickListener = recyclerViewClickListener;
         this.lstCities = lstCities;
         Context context = activity;
-        weatherViewModel = ViewModelProviders.of((FragmentActivity)activity).get(WeatherViewModel.class);
+        weatherViewModel = ViewModelProviders.of((FragmentActivity) activity).get(WeatherViewModel.class);
     }
 
     @NonNull
@@ -45,6 +47,10 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         city = lstCities.get(position);
         if (city != null) {
             holder.tvCityName.setText(city.getName());
+            holder.tvTemperature.setText(String.format("%.2f", (city.getTemperature() - 273.15)) + (char) 0x00B0);
+            holder.tvDescription.setText(city.getDescription());
+            String iconUrl = "http://openweathermap.org/img/w/" + city.getIcon() + ".png";
+            Picasso.with(holder.imgIcon.getContext()).load(iconUrl).into(holder.imgIcon);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +71,13 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
 
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvCityName;
+    public Cities getCityAt(int adapterPosition) {
+        return lstCities.get(adapterPosition);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvCityName, tvTemperature, tvDescription;
+        private ImageView imgIcon;
 
         private ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +86,9 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
 
         private void initViews(View itemView) {
             tvCityName = itemView.findViewById(R.id.tv_city_name);
+            tvTemperature = itemView.findViewById(R.id.tv_temperature);
+            tvDescription = itemView.findViewById(R.id.tv_description);
+            imgIcon = itemView.findViewById(R.id.img_weather_icon);
         }
     }
 }

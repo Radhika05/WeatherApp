@@ -2,6 +2,9 @@ package com.radhika.weatherapp.Network;
 
 import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
+import com.radhika.weatherapp.Models.WeatherAPIResultList;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,4 +21,7 @@ public interface WeatherApiInterface {
 
     @GET("forecast")
     Call<WeatherAPIForecastResult>getWeatherForecastData(@Query("q") String cityName, @Query("appid") String AppID);
+
+    @GET("group")
+    Call<WeatherAPIResultList> updateWeatherInfo(@Query("id") String cityId, @Query("units") String units, @Query("appid") String appId);
 }

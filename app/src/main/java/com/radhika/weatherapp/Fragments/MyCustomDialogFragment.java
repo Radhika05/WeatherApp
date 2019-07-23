@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,17 +67,20 @@ public class MyCustomDialogFragment extends DialogFragment implements View.OnCli
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.bt_add) {
-            weatherViewModel.getWeatherInfo(etAdd.getText().toString()).observe(this, new Observer<WeatherAPIResult>() {
+            weatherViewModel.getWeatherInfo(etAdd.getText().toString().trim()).observe(this, new Observer<WeatherAPIResult>() {
                 @Override
                 public void onChanged(WeatherAPIResult weatherAPIResult) {
                     assert weatherAPIResult != null;
                     Log.i("weatherAPIResult", weatherAPIResult.toString());
-                        Cities cities = new Cities();
-                        cities.setId(weatherAPIResult.getId());
-                        cities.setName(weatherAPIResult.getName());
-                        weatherViewModel.insertCities(cities);
-                        dismiss();
-                    }
+                    Cities cities = new Cities();
+                    cities.setCityId(weatherAPIResult.getId());
+                    cities.setTemperature(weatherAPIResult.getMain().getTemp());
+                    cities.setDescription(weatherAPIResult.getWeather().get(0).getDescription());
+                    cities.setIcon(weatherAPIResult.getWeather().get(0).getIcon());
+                    cities.setName(weatherAPIResult.getName());
+                    weatherViewModel.insertCities(cities);
+                    dismiss();
+                }
             });
         }
     }

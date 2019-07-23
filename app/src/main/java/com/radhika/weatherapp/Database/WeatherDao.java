@@ -30,5 +30,4 @@ public interface WeatherDao {
 
     @Query("SELECT * FROM Cities")
     public LiveData<List<Cities>> getCities();
-
 }

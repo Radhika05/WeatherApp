@@ -19,6 +19,39 @@ public class Cities {
     @ColumnInfo(name = "city")
     private String name;
 
+    @ColumnInfo(name = "temperature")
+    private Double temperature;
+
+    @ColumnInfo(name = "description")
+    private String description;
+
+    @ColumnInfo(name = "icon")
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getCityId() {
         return cityId;
     }
@@ -34,6 +67,7 @@ public class Cities {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }

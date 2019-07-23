@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Wind {
+
     private Double speed;
     private Double deg;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
