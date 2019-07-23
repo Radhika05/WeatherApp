@@ -11,7 +11,7 @@
     <string name="temp_information">26, partly cloudy</string>
     <string name="wind">Wind</string>
     <string name="wind_speed">18 km/h</string>
-    <string name="humidity">HUMIDITY</string>
+    <string name="humidity">Humidity</string>
     <string name="humidity_rate">73%</string>
     <string name="day_of_week">Mon</string>
     <string name="location_hints">Type city or postcode</string>
