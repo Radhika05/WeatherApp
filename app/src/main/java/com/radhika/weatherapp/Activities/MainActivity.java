@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        WeatherDetailsFragment weatherDetailsFragment =  new WeatherDetailsFragment();
-        FragmentsManager.replaceFragment(this,weatherDetailsFragment,R.id.fragment_container,false);
-        binding.fbAdd.setOnClickListener(this);
+        WeatherDetailsFragment weatherDetailsFragment = new WeatherDetailsFragment();
+        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, false);
+        binding.imgAddCity.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.fb_add) {
+        if (view.getId() == R.id.img_add_city) {
             MyCustomDialogFragment myCustomDialogFragment = new MyCustomDialogFragment();
             myCustomDialogFragment.show(getSupportFragmentManager(), "example");
         }
@@ -37,17 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        if(count==0){
+        if (count == 0) {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed();
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
-
     }
 }
