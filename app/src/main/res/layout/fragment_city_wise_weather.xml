@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView android:layout_height="match_parent" android:layout_width="match_parent"
+    <ScrollView android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_25sdp" android:layout_width="match_parent"
         android:background="@drawable/weather">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -10,14 +11,16 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView2"
+                style="@style/Widget.MaterialComponents.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginBottom="10dp"
                 app:cardBackgroundColor="#bf000000"
+                app:layout_constraintBottom_toTopOf="@+id/materialCardView4"
                 app:layout_constraintEnd_toEndOf="parent"
-                style="@style/Widget.MaterialComponents.CardView"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView">
@@ -31,28 +34,30 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_marginBottom="@dimen/_25sdp"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0" />
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
+                style="@style/Widget.MaterialComponents.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:cardBackgroundColor="#bf000000"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/_8sdp"
-                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_marginBottom="10dp"
                 android:minHeight="200dp"
+                app:cardBackgroundColor="#bf000000"
+                app:layout_constraintBottom_toTopOf="@+id/materialCardView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -66,11 +71,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
+                        android:contentDescription="@string/weather_information"
                         android:src="@drawable/app_icon"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/weather_information" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_city"
@@ -84,9 +89,9 @@
 
                     <TextView
                         android:id="@+id/txt_date"
+                        style="@style/headingStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/headingStyle"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_15sdp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -94,22 +99,22 @@
 
                     <TextView
                         android:id="@+id/txt_time"
+                        style="@style/subHeadingStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
-                        style="@style/subHeadingStyle"
                         android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txt_date" />
 
                     <TextView
                         android:id="@+id/txt_wind"
+                        style="@style/subHeadingStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_25sdp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:text="@string/wind"
-                        style="@style/subHeadingStyle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
@@ -152,23 +157,23 @@
 
                     <TextView
                         android:id="@+id/txt_humidity_val"
+                        style="@style/subHeadingStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_20sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        style="@style/subHeadingStyle"
                         app:layout_constraintStart_toStartOf="@+id/guideline2"
                         app:layout_constraintTop_toBottomOf="@+id/txt_wind_val" />
 
                     <TextView
                         android:id="@+id/txt_temp"
+                        style="@style/subHeadingStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:textSize="@dimen/_33sdp"
-                        style="@style/subHeadingStyle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/img_forecast_icon"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -209,10 +214,10 @@
 
                     <TextView
                         android:id="@+id/txt_max_val"
+                        style="@style/subHeadingStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
-                        style="@style/subHeadingStyle"
                         android:layout_marginTop="@dimen/_10sdp"
                         app:layout_constraintStart_toStartOf="@+id/guideline3"
                         app:layout_constraintTop_toBottomOf="@+id/txt_min_val" />
@@ -232,20 +237,21 @@
                         app:layout_constraintGuide_begin="243dp" />
 
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView4"
+                style="@style/Widget.MaterialComponents.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_8sdp"
-                style="@style/Widget.MaterialComponents.CardView"
                 app:cardBackgroundColor="#bf000000"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -259,15 +265,15 @@
                         android:id="@+id/rv_city_details_all"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintHorizontal_bias="1.0"
                         android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_marginBottom="@dimen/_25sdp"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>

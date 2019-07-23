@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         WeatherDetailsFragment weatherDetailsFragment = new WeatherDetailsFragment();
-        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, false);
+        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, true);
         binding.imgAddCity.setOnClickListener(this);
     }
 
@@ -32,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             MyCustomDialogFragment myCustomDialogFragment = new MyCustomDialogFragment();
             myCustomDialogFragment.show(getSupportFragmentManager(), "example");
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        WeatherDetailsFragment weatherDetailsFragment = new WeatherDetailsFragment();
+        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, true);
     }
 
     @Override
