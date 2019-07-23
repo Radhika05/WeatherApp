@@ -21,18 +21,14 @@ import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.R;
 import com.squareup.picasso.Picasso;
 
-
-
 public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWiseWeatherDetailsAdapter.ViewHolder> {
 
     private java.util.List<List> lists;
     private Context context;
-    private WeatherAPIForecastResult weatherAPIForecastResult;
 
     public CityWiseWeatherDetailsAdapter(java.util.List<List> lists, FragmentActivity activity, WeatherAPIForecastResult weatherAPIForecastResult) {
         this.lists = lists;
         this.context = activity;
-        this.weatherAPIForecastResult =weatherAPIForecastResult;
     }
 
     @NonNull

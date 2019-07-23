@@ -23,11 +23,19 @@ public interface WeatherDao {
     void insert(Cities cities);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void update(Cities maps);
+    void update(Cities cities);
+
+    @Query("SELECT * from Cities WHERE city = :city")
+    Cities getItemById(String city);
 
     @Delete
-    void delete(Cities maps);
+    void delete(Cities cities);
 
     @Query("SELECT * FROM Cities")
     public LiveData<List<Cities>> getCities();
+
+    @Query("SELECT city FROM Cities WHERE city = :city LIMIT 1")
+    String checkCityExist(String city);
+
+
 }

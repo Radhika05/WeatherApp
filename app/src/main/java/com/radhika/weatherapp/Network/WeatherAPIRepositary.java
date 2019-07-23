@@ -77,7 +77,9 @@ public class WeatherAPIRepositary {
         weatherAPIResultCall.enqueue(new Callback<WeatherAPIResult>() {
             @Override
             public void onResponse(Call<WeatherAPIResult> call, retrofit2.Response<WeatherAPIResult> response) {
-                weatherAPIResultMutableLiveData.postValue(response.body());
+                if(response.isSuccessful()) {
+                    weatherAPIResultMutableLiveData.postValue(response.body());
+                }
             }
 
             @Override
@@ -133,6 +135,20 @@ public class WeatherAPIRepositary {
         return allCities;
     }
 
+    public void insertOrUpdate(Cities cities) {
+        Cities citiesData = weatherDao.getItemById(cities.getName());
+        if (citiesData == null)
+            new InsertCityAsync(weatherDao).execute(cities);
+        else
+            new UpdateCityAsync(weatherDao).execute(cities);
+    }
+
+
+    public String checkCityExist(String city) {
+       // return  new checkCityExistAsync(weatherDao).execute(city);
+       return weatherDao.checkCityExist(city);
+    }
+
     public static class InsertCityAsync extends AsyncTask<Cities, Void, Void> {
         WeatherDao weatherDao;
 
@@ -167,7 +183,6 @@ public class WeatherAPIRepositary {
         private DeleteCityAsync(WeatherDao weatherDao) {
             this.weatherDao = weatherDao;
         }
-
         @Override
         protected Void doInBackground(Cities... cities) {
             weatherDao.delete(cities[0]);

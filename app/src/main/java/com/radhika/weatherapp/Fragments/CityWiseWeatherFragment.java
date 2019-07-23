@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -42,6 +43,8 @@ public class CityWiseWeatherFragment extends Fragment {
                 inflater, R.layout.fragment_city_wise_weather, container, false);
         View view = cityWiseWeatherBinding.getRoot();
         initViews(view);
+
+
         weatherViewModel.getCity().observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
             @Override
             public void onChanged(String city) {

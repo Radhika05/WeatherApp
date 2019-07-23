@@ -107,23 +107,17 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
         if (lstCities != null && lstCities.size() > 0) {
-            String cityId = "";
+            StringBuilder cityId = new StringBuilder();
             for (int index = 0; index < (lstCities.size() > 20 ? 20 : lstCities.size()); index++) {
-                cityId += lstCities.get(index).getCityId() + ",";
+                cityId.append(lstCities.get(index).getCityId()).append(",");
             }
-            cityId = cityId.substring(0, cityId.length() - 1);
-            weatherViewModel.updateWeatherInfo(cityId).observe(this, new Observer<WeatherAPIResultList>() {
+            cityId = new StringBuilder(cityId.substring(0, cityId.length() - 1));
+            weatherViewModel.updateWeatherInfo(cityId.toString()).observe(this, new Observer<WeatherAPIResultList>() {
                 @Override
                 public void onChanged(WeatherAPIResultList weatherAPIResultList) {
                     List<Cities> lstCity = new ArrayList<>();
                     for (WeatherAPIResult weatherAPIResult : weatherAPIResultList.getList()) {
                         Cities cities = new Cities();
-                        for (Cities item : lstCities) {
-                            if (item.getCityId() == weatherAPIResult.getId()) {
-                                cities.setId(item.getId());
-                                break;
-                            }
-                        }
                         cities.setCityId(weatherAPIResult.getId());
                         cities.setTemperature(weatherAPIResult.getMain().getTemp() + 273.15);
                         cities.setDescription(weatherAPIResult.getWeather().get(0).getDescription());

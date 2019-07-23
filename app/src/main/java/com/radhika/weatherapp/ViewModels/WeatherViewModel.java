@@ -1,6 +1,7 @@
 package com.radhika.weatherapp.ViewModels;
 
 import android.app.Application;
+import android.text.Editable;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -17,6 +18,7 @@ import java.util.List;
 public class WeatherViewModel extends ViewModel {
     private final MutableLiveData<String> cities = new MutableLiveData<String>();
     private WeatherAPIRepositary weatherAPIRepositary = new WeatherAPIRepositary();
+    private LiveData<List<Cities>> listCities;
 
     public MutableLiveData<WeatherAPIResult> getWeatherInfo(String cityName){
         return weatherAPIRepositary.getWeatherData(cityName,"9ecde7b8e13078924e82d5bc2a8f48ec");
@@ -28,11 +30,16 @@ public class WeatherViewModel extends ViewModel {
 
     public LiveData<List<Cities>> getAllCities(Application activity){
         weatherAPIRepositary = new WeatherAPIRepositary(activity);
-        return weatherAPIRepositary.getAllCities();
+        listCities = weatherAPIRepositary.getAllCities();
+        return listCities;
     }
 
     public void insertCities(Cities cities){
         weatherAPIRepositary.insert(cities);
+    }
+
+    public void insertOrUpdate(Cities cities){
+        weatherAPIRepositary.insertOrUpdate(cities);
     }
 
     public void setCity(String city) {
@@ -54,4 +61,9 @@ public class WeatherViewModel extends ViewModel {
     public void delete(Cities cities) {
         weatherAPIRepositary.delete(cities);
     }
+
+    public String checkCityExist(String city) {
+       return weatherAPIRepositary.checkCityExist(city);
+    }
+
 }

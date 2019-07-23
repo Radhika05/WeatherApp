@@ -25,5 +25,6 @@
     <string name="add">Add</string>
     <string name="max">Max</string>
     <string name="min">Min</string>
+    <string name="enter_city_name">Enter City Name</string>
 
 </resources>

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -70,21 +71,27 @@ public class MyCustomDialogFragment extends DialogFragment implements View.OnCli
     public void onClick(View view) {
         if (view.getId() == R.id.bt_add) {
             if (!TextUtils.isEmpty(etAdd.getText())) {
-                weatherViewModel.getWeatherInfo(etAdd.getText().toString().trim()).observe(this, new Observer<WeatherAPIResult>() {
-                    @Override
-                    public void onChanged(WeatherAPIResult weatherAPIResult) {
-                        assert weatherAPIResult != null;
-                        Log.i("weatherAPIResult", weatherAPIResult.toString());
-                        Cities cities = new Cities();
-                        cities.setCityId(weatherAPIResult.getId());
-                        cities.setTemperature(weatherAPIResult.getMain().getTemp());
-                        cities.setDescription(weatherAPIResult.getWeather().get(0).getDescription());
-                        cities.setIcon(weatherAPIResult.getWeather().get(0).getIcon());
-                        cities.setName(weatherAPIResult.getName());
-                        weatherViewModel.insertCities(cities);
-                        dismiss();
-                    }
-                });
+                String mCityExist = weatherViewModel.checkCityExist(etAdd.getText().toString().trim().toLowerCase());
+                if (mCityExist!=null && mCityExist.equals(etAdd.getText().toString().trim().toLowerCase())) {
+                    Toast.makeText(getContext(), "City with same name already exist", Toast.LENGTH_LONG).show();
+                    dismiss();
+                } else {
+                    weatherViewModel.getWeatherInfo(etAdd.getText().toString().trim()).observe(this, new Observer<WeatherAPIResult>() {
+                        @Override
+                        public void onChanged(WeatherAPIResult weatherAPIResult) {
+                            assert weatherAPIResult != null;
+                            Log.i("weatherAPIResult", weatherAPIResult.toString());
+                            Cities cities = new Cities();
+                            cities.setCityId(weatherAPIResult.getId());
+                            cities.setTemperature(weatherAPIResult.getMain().getTemp());
+                            cities.setDescription(weatherAPIResult.getWeather().get(0).getDescription());
+                            cities.setIcon(weatherAPIResult.getWeather().get(0).getIcon());
+                            cities.setName(weatherAPIResult.getName().trim().toLowerCase());
+                            weatherViewModel.insertOrUpdate(cities);
+                            dismiss();
+                        }
+                    });
+                }
             } else {
                 Toast.makeText(getContext(), "Please enter city name", Toast.LENGTH_LONG).show();
             }
