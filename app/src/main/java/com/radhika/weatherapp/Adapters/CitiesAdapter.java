@@ -20,6 +20,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * bind the list of city with temp details
+ */
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<Cities> lstCities;
@@ -30,7 +33,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
     public CitiesAdapter(List<Cities> lstCities, RecyclerViewClickListener recyclerViewClickListener, FragmentActivity activity) {
         this.recyclerViewClickListener = recyclerViewClickListener;
         this.lstCities = lstCities;
-        Context context = activity;
         weatherViewModel = ViewModelProviders.of(activity).get(WeatherViewModel.class);
     }
 

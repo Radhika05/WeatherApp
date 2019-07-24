@@ -24,10 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherAPIRepositary {
 
-    private WeatherAPIRepositary instance;
     private static Retrofit retrofit;
     private static WeatherDao weatherDao;
-    private LiveData<List<Cities>> allCities;
+    private WeatherAPIRepositary instance;
     private MutableLiveData<WeatherAPIResult> weatherAPIResultMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<WeatherAPIForecastResult> weatherAPIForecastResultMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<WeatherAPIResultList> lstweatherAPIResultMutableLiveData = new MutableLiveData<>();
@@ -131,8 +130,7 @@ public class WeatherAPIRepositary {
     }
 
     public LiveData<List<Cities>> getAllCities() {
-        allCities = weatherDao.getCities();
-        return allCities;
+        return weatherDao.getCities();
     }
 
     public void insertOrUpdate(Cities cities) {

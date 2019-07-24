@@ -20,18 +20,19 @@ import com.radhika.weatherapp.R;
 import com.squareup.picasso.Picasso;
 
 
+/**
+ * Displaying the list of city with current weather details
+ */
 public class CityWiseWeatherDetailsAdapter extends RecyclerView.Adapter<CityWiseWeatherDetailsAdapter.ViewHolder> {
 
     private java.util.List<List> lists;
     private String tag;
     private Context context;
-    private WeatherAPIForecastResult weatherAPIForecastResult;
 
     public CityWiseWeatherDetailsAdapter(java.util.List<List> lists, FragmentActivity activity, WeatherAPIForecastResult weatherAPIForecastResult, String tag) {
         this.lists = lists;
         this.context = activity;
         this.tag = tag;
-        this.weatherAPIForecastResult = weatherAPIForecastResult;
     }
 
     @NonNull

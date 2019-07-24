@@ -26,5 +26,9 @@
     <string name="max">Max</string>
     <string name="min">Min</string>
     <string name="enter_city_name">Enter City Name</string>
+    <string name="back_press">Press once again to exit</string>
+    <string name="no_city">No City Added</string>
+    <string name="ineternet_connection">Please make sure you are connected to Internet!</string>
+    <string name="city_delete">City deleted successfully.</string>
 
 </resources>

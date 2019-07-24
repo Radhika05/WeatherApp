@@ -27,6 +27,9 @@ import com.radhika.weatherapp.ViewModels.WeatherViewModel;
 
 import java.util.Objects;
 
+/**
+ *
+ */
 public class MyCustomDialogFragment extends DialogFragment implements View.OnClickListener {
 
     private WeatherViewModel weatherViewModel;

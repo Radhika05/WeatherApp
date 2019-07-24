@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.radhika.weatherapp.Adapters.CityWiseWeatherDetailsAdapter;
 import com.radhika.weatherapp.Common.Utils;
+import com.radhika.weatherapp.Common.ViewDialog;
 import com.radhika.weatherapp.Models.Main;
 import com.radhika.weatherapp.Models.WeatherAPIForecastResult;
 import com.radhika.weatherapp.R;
@@ -33,19 +36,23 @@ import java.util.Objects;
 
 import static com.radhika.weatherapp.Common.Utils.getDateFromDateTimeString;
 
-public class CityWiseWeatherFragment extends Fragment {
+public class CityWiseWeatherFragment extends Fragment implements View.OnClickListener {
 
     private WeatherViewModel weatherViewModel;
+    private ViewDialog dialog;
     private RecyclerView rvCiyWiseData, rvCiyWiseDataAll;
     private FragmentCityWiseWeatherBinding cityWiseWeatherBinding;
+    private ImageView imgAddCity,imgBack;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         cityWiseWeatherBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_city_wise_weather, container, false);
+        dialog = new ViewDialog(getActivity());
         View view = cityWiseWeatherBinding.getRoot();
         initViews(view);
+        imgBack.setOnClickListener(this);
 
         weatherViewModel.getCity().observe(Objects.requireNonNull(getActivity()), new Observer<String>() {
             @Override
@@ -68,6 +75,7 @@ public class CityWiseWeatherFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void BindView(WeatherAPIForecastResult weatherAPIForecastResult) {
+        dialog.showDialog();
         List<com.radhika.weatherapp.Models.List> todaysList = new ArrayList<>();
         List<com.radhika.weatherapp.Models.List> upComingList = new ArrayList<>();
         List<com.radhika.weatherapp.Models.List> lists = weatherAPIForecastResult.getList();
@@ -94,6 +102,7 @@ public class CityWiseWeatherFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         CityWiseWeatherDetailsAdapter cityWiseWeatherDetails = new CityWiseWeatherDetailsAdapter(todaysList, getActivity(), weatherAPIForecastResult, "current");
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rvCiyWiseData.setLayoutManager(mLayoutManager);
@@ -105,11 +114,29 @@ public class CityWiseWeatherFragment extends Fragment {
         rvCiyWiseDataAll.setLayoutManager(mLayoutManagerAll);
         rvCiyWiseDataAll.setItemAnimator(new DefaultItemAnimator());
         rvCiyWiseDataAll.setAdapter(cityWiseWeatherDetailsAll);
+        dialog.hideDialog();
     }
 
     private void initViews(View view) {
+        imgAddCity = Objects.requireNonNull(getActivity()).findViewById(R.id.img_add_city);
+        imgBack = Objects.requireNonNull(getActivity()).findViewById(R.id.img_back);
+        imgAddCity.setVisibility(View.GONE);
+        imgBack.setVisibility(View.VISIBLE);
         rvCiyWiseData = view.findViewById(R.id.rv_city_details);
         rvCiyWiseDataAll = view.findViewById(R.id.rv_city_details_all);
         weatherViewModel = ViewModelProviders.of(Objects.requireNonNull(this.getActivity())).get(WeatherViewModel.class);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.img_back:
+                imgAddCity.setVisibility(View.VISIBLE);
+                imgBack.setVisibility(View.GONE);
+                String Tag = CityWiseWeatherFragment.class.getName();
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            fm.popBackStack (Tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            break;
+        }
     }
 }

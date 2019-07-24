@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Utils {
 
@@ -37,10 +38,10 @@ public class Utils {
     }
 
     public static Date getDateFromDateTimeString(String dateTimeString) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            return formatter.parse(formatter.format(simpleDateFormat.parse(dateTimeString)));
+            return formatter.parse(formatter.format(Objects.requireNonNull(simpleDateFormat.parse(dateTimeString))));
         } catch (ParseException e) {
             e.printStackTrace();
             return new Date();

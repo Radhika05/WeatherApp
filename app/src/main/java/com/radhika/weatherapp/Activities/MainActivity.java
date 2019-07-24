@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
 
 import com.radhika.weatherapp.Common.FragmentsManager;
 import com.radhika.weatherapp.Fragments.MyCustomDialogFragment;
@@ -16,13 +17,14 @@ import com.radhika.weatherapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean doubleBackToExitPressedOnce;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         WeatherDetailsFragment weatherDetailsFragment = new WeatherDetailsFragment();
-        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, true);
+        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, false);
         binding.imgAddCity.setOnClickListener(this);
     }
 
@@ -30,29 +32,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view.getId() == R.id.img_add_city) {
             MyCustomDialogFragment myCustomDialogFragment = new MyCustomDialogFragment();
-            myCustomDialogFragment.show(getSupportFragmentManager(), "example");
+            myCustomDialogFragment.show(getSupportFragmentManager(), "myCustomDialogFragment");
         }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        WeatherDetailsFragment weatherDetailsFragment = new WeatherDetailsFragment();
-        FragmentsManager.replaceFragment(this, weatherDetailsFragment, R.id.fragment_container, true);
+        binding.imgAddCity.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onBackPressed() {
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-        if (count == 0) {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed();
+                finish();
                 return;
             }
-            this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
-        } else {
-            super.onBackPressed();
-        }
+            this.doubleBackToExitPressedOnce=true;
+            Toast.makeText(this,R.string.back_press,Toast.LENGTH_SHORT).show();
     }
 }

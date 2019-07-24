@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.radhika.weatherapp.Adapters.CitiesAdapter;
 import com.radhika.weatherapp.Common.FragmentsManager;
 import com.radhika.weatherapp.Common.Utils;
+import com.radhika.weatherapp.Common.ViewDialog;
 import com.radhika.weatherapp.Interface.RecyclerViewClickListener;
 import com.radhika.weatherapp.Models.Cities;
 import com.radhika.weatherapp.Models.WeatherAPIResult;
@@ -39,7 +40,8 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
     private SwipeRefreshLayout swipeRefreshLayout;
     private WeatherViewModel weatherViewModel;
     private List<Cities> lstCities;
-    TextView tvError;
+    private TextView tvError;
+    private ViewDialog dialog;
 
     @NonNull
     @Override
@@ -47,6 +49,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_details, container, false);
         initViews(view);
+        dialog = new ViewDialog(getActivity());
         weatherViewModel.getAllCities(Objects.requireNonNull(getActivity()).getApplication()).observe(this, new Observer<List<Cities>>() {
             @Override
             public void onChanged(List<Cities> cities) {
@@ -54,7 +57,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
                 if (cities == null || cities.size() == 0) {
                     tvError.setVisibility(View.VISIBLE);
                     swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(getActivity(), "No City Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.no_city, Toast.LENGTH_SHORT).show();
                 } else {
                     tvError.setVisibility(View.GONE);
                     bindRecyclerView(cities);
@@ -70,10 +73,12 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
             public void onClick() {
                 try {
                     if (Utils.isOnline(getContext())) {
+                        dialog.showDialog();
                         CityWiseWeatherFragment cityWiseWeatherFragment = new CityWiseWeatherFragment();
                         FragmentsManager.addFragment(getActivity(), cityWiseWeatherFragment, R.id.fragment_container, true);
+                        dialog.hideDialog();
                     } else {
-                        Toast.makeText(getContext(), "Please make sure you are connected to Internet!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.ineternet_connection, Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception error) {
                     Log.d("error", error.toString());
@@ -103,7 +108,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
                 cityAdapter.notifyItemRemoved(position);
                 cityAdapter.notifyItemChanged(position, lstCities.size());
                 cityAdapter.notifyDataSetChanged();
-                Toast.makeText(getContext(), "City deleted successfully.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.city_delete, Toast.LENGTH_LONG).show();
             }
         }).attachToRecyclerView(rvCities);
         swipeRefreshLayout.setRefreshing(false);
@@ -150,7 +155,7 @@ public class WeatherDetailsFragment extends Fragment implements SwipeRefreshLayo
                 tvError.setVisibility(View.VISIBLE);
             }
         } else {
-            Toast.makeText(getContext(), "Please make sure you are connected to Internet!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.ineternet_connection, Toast.LENGTH_LONG).show();
         }
     }
 }
